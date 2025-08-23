@@ -1,0 +1,17 @@
+[
+  {
+    "title": "React Basics Guide",
+    "description": "Learn the fundamentals of React with examples.",
+    "link": "https://react.dev/learn"
+  },
+  {
+    "title": "Next.js Official Docs",
+    "description": "The best place to learn Next.js step by step.",
+    "link": "https://nextjs.org/docs"
+  },
+  {
+    "title": "Tailwind CSS Handbook",
+    "description": "Master modern styling with Tailwind.",
+    "link": "https://tailwindcss.com/docs"
+  }
+]
