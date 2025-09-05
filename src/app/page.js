@@ -1,103 +1,81 @@
-import Image from "next/image";
+'use client'
+import Link from 'next/link'
+import { useMemo } from 'react'
+import { FaGraduationCap, FaUsers, FaComments, FaBookOpen, FaRocket, FaShieldAlt, FaLink, FaQuestionCircle, FaHashtag } from 'react-icons/fa'
 
-export default function Home() {
+export default function HomePage() {
+  const features = useMemo(() => ([
+    { icon: <FaComments className="w-8 h-8" />, title: 'Real-time Chat', description: 'Instant discussions with typing indicators, replies, pins, and file sharing' },
+    { icon: <FaUsers className="w-8 h-8" />, title: 'Class Channels', description: 'Organized spaces for courses with members, resources, and Q&A' },
+    { icon: <FaBookOpen className="w-8 h-8" />, title: 'Resources', description: 'Share PDFs, images, videos, and links right inside the channel' },
+    { icon: <FaGraduationCap className="w-8 h-8" />, title: 'Q&A', description: 'Ask questions and get verified answers from teachers and peers' },
+    { icon: <FaRocket className="w-8 h-8" />, title: 'Modern UX', description: 'Clean, keyboard-friendly interface with fast, optimistic updates' },
+    { icon: <FaShieldAlt className="w-8 h-8" />, title: 'Secure', description: 'JWT auth, role-based access, and safe moderation controls' }
+  ]), [])
+
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.js
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <div className="min-h-screen">
+      {/* Hero Section */}
+      <section className="relative overflow-hidden">
+        <div className="absolute inset-0 bg-[#1E2A47]" />
+        <div className="relative max-w-7xl mx-auto px-4 pt-24 pb-20 text-center">
+          <div className="mx-auto max-w-3xl">
+            <h1 className="text-5xl md:text-6xl font-extrabold tracking-tight text-white mb-6">
+              Learn together. Faster.
+            </h1>
+            <p className="text-lg md:text-2xl leading-relaxed text-white/85 mb-10">
+              EduChat brings students and teachers into focused channels with real-time chat, resource sharing, and structured Q&A — all in one place.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link href="/auth/register" className="inline-flex items-center justify-center rounded-lg bg-[#FF6A3D] text-white font-semibold px-8 py-3 shadow-sm hover:bg-[#ff5a26] transition">
+                Create free account
+              </Link>
+              <Link href="/auth/login" className="inline-flex items-center justify-center rounded-lg bg-white text-[#1E2A47] font-semibold px-8 py-3 shadow-sm hover:bg-white/95 border border-white/70 transition">
+                Sign in
+              </Link>
+            </div>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      </section>
+
+      {/* Features Section */}
+      <section className="py-20 px-4 bg-white">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-14">
+            <h2 className="text-4xl font-extrabold text-gray-900 mb-3">Everything your class needs</h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">Purpose-built features that make collaboration clear, quick, and delightful.</p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {features.map((feature, index) => (
+              <div key={index} className="rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition overflow-hidden bg-white group">
+                <div className="h-1 bg-[#FF6A3D] group-hover:opacity-90" />
+                <div className="p-6 transform transition duration-200 group-hover:-translate-y-0.5">
+                  <div className="text-[#1E2A47] mb-3">
+                    {feature.icon}
+                  </div>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-2">{feature.title}</h3>
+                  <p className="text-gray-600">{feature.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="relative overflow-hidden">
+        <div className="absolute inset-0 bg-[#1E2A47]" />
+        <div className="relative max-w-5xl mx-auto px-4 py-16 text-center">
+          <h2 className="text-4xl font-extrabold text-white mb-4">Bring your class together</h2>
+          <p className="text-lg text-white/90 mb-8">Create channels for every course, keep resources organized, and move from question to answer in seconds.</p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link href="/auth/register" className="inline-flex items-center justify-center rounded-lg bg-[#FF6A3D] text-white font-semibold px-8 py-3 shadow-sm hover:bg-[#ff5a26] transition">
+              Get started free
+            </Link>
+          </div>
+        </div>
+      </section>
     </div>
-  );
+  )
 }

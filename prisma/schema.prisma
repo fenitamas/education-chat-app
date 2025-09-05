@@ -1,0 +1,119 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id               String   @id @default(cuid())
+  name             String
+  email            String   @unique
+  passwordHash     String
+  role             Role     @default(STUDENT)
+  avatarUrl        String?
+  channelsEnrolled ChannelMember[]
+  channelsManaged  Channel[] @relation("ManagedChannels")
+  messages         Message[]
+  resources        Resource[]
+  questions        Question[]
+  answers          Answer[]
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
+
+enum Role {
+  STUDENT
+  TEACHER
+  ADMIN
+}
+
+model Channel {
+  id              String          @id @default(cuid())
+  name            String
+  description     String?
+  createdBy       User            @relation("ManagedChannels", fields: [createdById], references: [id])
+  createdById     String
+  members         ChannelMember[]
+  messages        Message[]
+  resources       Resource[]
+  questions       Question[]
+  pinnedMessage   Message?        @relation("PinnedMessage", fields: [pinnedMessageId], references: [id])
+  pinnedMessageId String?
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+}
+
+model ChannelMember {
+  id        String  @id @default(cuid())
+  user      User    @relation(fields: [userId], references: [id])
+  userId    String
+  channel   Channel @relation(fields: [channelId], references: [id])
+  channelId String
+  createdAt DateTime @default(now())
+
+  @@unique([userId, channelId])
+}
+
+model Message {
+  id         String      @id @default(cuid())
+  channel    Channel     @relation(fields: [channelId], references: [id])
+  channelId  String
+  createdBy  User        @relation(fields: [createdById], references: [id])
+  createdById String
+  text       String?
+  replyTo    Message?    @relation("ReplyTo", fields: [replyToId], references: [id])
+  replyToId  String?
+  replies    Message[]   @relation("ReplyTo")
+  pinnedIn   Channel[]   @relation("PinnedMessage")
+  createdAt  DateTime    @default(now())
+}
+
+model Resource {
+  id           String  @id @default(cuid())
+  channel      Channel @relation(fields: [channelId], references: [id])
+  channelId    String
+  title        String
+  description  String?
+  type         ResourceType
+  url          String
+  uploadedBy   User    @relation(fields: [uploadedById], references: [id])
+  uploadedById String
+  createdAt    DateTime @default(now())
+}
+
+enum ResourceType {
+  PDF
+  IMAGE
+  DOC
+  LINK
+  VIDEO
+}
+
+model Question {
+  id          String   @id @default(cuid())
+  channel     Channel  @relation(fields: [channelId], references: [id])
+  channelId   String
+  author      User     @relation(fields: [authorId], references: [id])
+  authorId    String
+  title       String
+  description String
+  solved      Boolean  @default(false)
+  answers     Answer[]
+  createdAt   DateTime @default(now())
+}
+
+model Answer {
+  id         String   @id @default(cuid())
+  question   Question @relation(fields: [questionId], references: [id])
+  questionId String
+  author     User     @relation(fields: [authorId], references: [id])
+  authorId   String
+  text       String
+  upvotes    String[] @default([])
+  createdAt  DateTime @default(now())
+}
+
+

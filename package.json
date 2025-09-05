@@ -1,23 +1,38 @@
 {
-  "name": "educational-chat-app",
-  "version": "0.1.0",
+  "name": "education-chat-app",
+  "version": "1.0.0",
   "private": true,
+  "description": "Unified Next.js app (client UI + API routes) for EduChat",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "next lint"
   },
   "dependencies": {
-    "react": "19.1.0",
-    "react-dom": "19.1.0",
-    "next": "15.5.0"
+    "@heroicons/react": "^2.2.0",
+    "axios": "^1.6.0",
+    "bcryptjs": "^2.4.3",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.8.0",
+    "multer": "^1.4.5-lts.1",
+    "next": "^15.5.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "react-hot-toast": "^2.4.1",
+    "react-icons": "^5.0.1"
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "^4",
-    "tailwindcss": "^4",
-    "eslint": "^9",
+    "@prisma/client": "^6.15.0",
+    "@tailwindcss/postcss": "^4.0.0",
+    "autoprefixer": "^10.4.20",
+    "eslint": "^9.0.0",
     "eslint-config-next": "15.5.0",
-    "@eslint/eslintrc": "^3"
+    "postcss": "^8.4.47",
+    "prisma": "^6.15.0",
+    "tailwindcss": "^4.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   }
 }

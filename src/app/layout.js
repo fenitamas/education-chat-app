@@ -1,33 +1,30 @@
-import "./globals.css";
+import './globals.css'
+import { Inter } from 'next/font/google'
+import Navbar from '@/components/Navbar'
+import Footer from '@/components/Footer'
+import { Toaster } from 'react-hot-toast'
+
+const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
-  title: "Education Chat App",
-  description: "A modern chat & learning app",
-};
+  title: 'EduChat - Modern Educational Chat Platform',
+  description: 'Connect, learn, and collaborate in real-time with students and educators worldwide',
+  keywords: 'education, chat, learning, collaboration, real-time',
+}
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body className="bg-gray-100 text-gray-900">
-        {/* Navbar */}
-        <nav className="bg-blue-600 text-white px-6 py-4 flex justify-between shadow">
-          <h1 className="text-xl font-bold">EduChat</h1>
-          <div className="space-x-4">
-            <a href="/" className="hover:underline">Home</a>
-            <a href="/chat/room1" className="hover:underline">Chat</a>
-            <a href="/qna" className="hover:underline">Q&A</a>
-            <a href="/resources" className="hover:underline">Resources</a>
-            <a herf="/register"className="hover:underline">Register</a>
-          </div>
-        </nav>
-
-        <main className="min-h-screen">{children}</main>
-
-        {/* Footer */}
-        <footer className="bg-gray-800 text-gray-200 text-center py-4 mt-10">
-          <p>© {new Date().getFullYear()} EduChat. Built with ❤️</p>
-        </footer>
+    <html lang="en" className="h-full">
+      <body className={`${inter.className} h-full bg-gray-50`}>
+        <Toaster position="top-right" />
+        <div className="min-h-screen flex flex-col">
+          <Navbar />
+          <main className="flex-1">
+            {children}
+          </main>
+          <Footer />
+        </div>
       </body>
     </html>
-  );
+  )
 }
